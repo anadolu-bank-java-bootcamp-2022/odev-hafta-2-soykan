@@ -3,6 +3,8 @@ package com.gokhantamkoc.javabootcamp.odevhafta2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.HashMap;
+import java.util.Collections;
 
 @SpringBootApplication
 public class PlayWorldOfMagic implements CommandLineRunner {
@@ -44,6 +46,25 @@ public class PlayWorldOfMagic implements CommandLineRunner {
 		int spellsUsed = 0;
 		// ______ BASLANGIC _______ Kodunuz buradan baslamali
 		
+		HashMap<String, Float> spellNamesAndDamages = new HashMap<>();
+		for (int i = 0; i < magicianSpells.length; i++) {
+			spellNamesAndDamages.put(magicianSpells[i], spellDamageInfo[i]);
+		}
+
+		HashMap<String, Float> bossNamesAndHps = new HashMap<>();
+		for (int i = 0; i < bossNames.length; i++) {
+			bossNamesAndHps.put(bossNames[i], bossHPs[i]);
+		}
+
+		float spellWithTheHighestDamage = Collections.max(spellNamesAndDamages.values());
+
+		for (float bossHp: bossNamesAndHps.values()) {
+			while (bossHp > 0) {
+				bossHp -= spellWithTheHighestDamage;
+				spellsUsed++;
+			}
+		}
+
 		// ______ SON _______ Kodunuz burada bitmeli
 		/* NOT: ______ BASLANGIC _______ ve ______ SON _______ 
 		 * arasina istediginiz kadar sayida satir ekleyebilirsiniz.
